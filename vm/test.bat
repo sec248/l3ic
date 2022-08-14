@@ -1,1 +1,1 @@
-gcc -std=c99 -o .\l3ic-vm .\src\vm.c 
+gcc -std=c99 -o .\l3ic-vm .\src\main.c 

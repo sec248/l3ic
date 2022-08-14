@@ -7,10 +7,10 @@ _Bool read_bytecode(const char *source, input_fn processor)
     if (file == NULL)
         return 0;
 
-    char current;
+    int current;
     while ((current = fgetc(file)) != EOF)
     {
-        int out = processor(current);
+        int out = processor((uint8_t)current);
         if (out < 0)
         {
             fclose(file);
