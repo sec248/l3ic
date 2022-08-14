@@ -1,6 +1,12 @@
+<div align="center">
+
 # L3IC
 
+![Logo](/assets/l3ic.png)
+
 L3IC (**L**ow **L**evel **L**anguage for **I**nput **C**ontrolling) allows you to control mouse and keyboard input on Windows.
+
+</div>
 
 ## Plans
 
