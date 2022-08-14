@@ -17,13 +17,14 @@ L3IC-VM will be a bytecode virtual machine, I am planning to keep it simple and 
 - Virtual Machine should mess with the bytecode source code only once. Commands will be executed char-by-char.
 - Planning to write in C99. L3IC-VM should directly use `Windows.h` without any Wrappers or Libraries.
 - L3IC-VM commands should be easy-to-write and not confuse other people. Because i am also thinking this is useful for Desktop/CLI Apps.
-- I will use `clang` for C compiler.
+- I will use `gcc` for C compiler.
+- Uses big-endian for multibyte parameters.
 
 ### IR Compiler
 
 L3IC-IR is an intermediate representation compiler for L3IC-VM.
 
-- Planning to write in Rust. Since L3IC-IR will convert the given source to bytecode, it doesn't need to use `Windows.h`.
+- Planning to write in Rust. Since L3IC-IR will convert the given source to bytecode, it doesn't need to use `windows.h`.
 - Planning to use pascal-case (`ThisIsPascalCase`).
 - Planning to support macros with parameters.
 
