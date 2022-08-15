@@ -14,11 +14,13 @@ L3IC (**L**ow **L**evel **L**anguage for **I**nput **C**ontrolling) allows you t
 
 L3IC-VM will be a bytecode virtual machine, I am planning to keep it simple and efficient.
 
-- Virtual Machine should mess with the bytecode source code only once. Commands will be executed char-by-char.
+- VM should mess with the bytecode source code only once. Commands will be executed char-by-char.
 - Planning to write in C99. L3IC-VM should directly use `Windows.h` without any Wrappers or Libraries.
-- L3IC-VM commands should be easy-to-write and not confuse other people. Because i am also thinking this is useful for Desktop/CLI Apps.
-- I will use `gcc` for C compiler.
+- L3IC-VM commands should be easy-to-write and not confuse other people. Because i also think this is useful for Desktop/CLI Apps.
+- Using `gcc` for C compiler.
 - Uses big-endian for multibyte parameters.
+- Has three (3) registers. `A`, `B` and `C`. These register also made for commands input/output.
+- Planning to add stack. Stack can hold `128` 16-bit unsigned integer.
 
 ### IR Compiler
 
