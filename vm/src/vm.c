@@ -79,6 +79,22 @@ int handle_command(uint8_t bytecode)
             reset_command_vm();
             break;
         }
+        case MOUSE_LEFT_PRESS:
+            __mouse_input(MOUSEEVENTF_LEFTDOWN)
+                reset_command_vm();
+            break;
+        case MOUSE_LEFT_RELEASE:
+            __mouse_input(MOUSEEVENTF_LEFTUP)
+                reset_command_vm();
+            break;
+        case MOUSE_RIGHT_PRESS:
+            __mouse_input(MOUSEEVENTF_RIGHTDOWN)
+                reset_command_vm();
+            break;
+        case MOUSE_RIGHT_RELEASE:
+            __mouse_input(MOUSEEVENTF_RIGHTUP)
+                reset_command_vm();
+            break;
         default:
             machine->current_command = bytecode;
             break;

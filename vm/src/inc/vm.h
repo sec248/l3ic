@@ -13,6 +13,10 @@
 #define CURSOR_SET_POS_X 0xB2
 #define CURSOR_SET_POS_Y 0xB3
 #define CURSOR_SET_POS 0xB4
+#define MOUSE_LEFT_PRESS 0xB5
+#define MOUSE_LEFT_RELEASE 0xB6
+#define MOUSE_RIGHT_PRESS 0xB7
+#define MOUSE_RIGHT_RELEASE 0xB8
 
 #define vm_error(command, message)                              \
     fprintf(stderr, "[l3ic-vm : %s]: %s.\n", command, message); \
