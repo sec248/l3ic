@@ -23,62 +23,57 @@ void free_vm(void)
     free(machine);
 }
 
+uint16_t pop_stack(void)
+{
+    uint16_t number = machine->stack[--machine->stack_idx];
+    machine->stack[machine->stack_idx] = 0;
+
+    return number;
+}
+
+void push_stack(uint16_t number)
+{
+    machine->stack[machine->stack_idx++] = number;
+}
+
+void reset_command_vm(void)
+{
+    machine->argc = 0;
+    machine->current_command = 0;
+}
+
 int handle_command(uint8_t bytecode)
 {
-    if (machine->current_command == 0)
-    {
-        machine->current_command = bytecode;
-        return 1;
-    }
-
     switch (machine->current_command)
     {
-    case SET_REG:
-        machine->arguments[machine->argc++] = bytecode;
-
-        if (machine->argc == 3)
+    case NO_COMMAND:
+        // all commands in this scope must be no argument commands
+        switch (bytecode)
         {
-            uint8_t got_register = machine->arguments[0];
-            uint16_t set_value = (machine->arguments[1] << 8) | machine->arguments[2];
-
-            switch (got_register)
-            {
-            case REG_A:
-                machine->reg_a = set_value;
-                break;
-            case REG_B:
-                machine->reg_b = set_value;
-                break;
-            case REG_C:
-                machine->reg_c = set_value;
-                break;
-            default:
-                vm_error("SetReg", "unknown register") break;
-            }
-
-            machine->argc = 0;
-            machine->current_command = 0;
+        case POP_STACK:
+            pop_stack();
+            reset_command_vm();
+            break;
+        default:
+            machine->current_command = bytecode;
+            break;
         }
         break;
+    // all commands below this must be argument required commands
     case PUSH_STACK:
         machine->arguments[machine->argc++] = bytecode;
 
         if (machine->argc == 2)
         {
             uint16_t push_value = (machine->arguments[0] << 8) | machine->arguments[1];
-            if (machine->stack_idx == 128)
-            {
-                vm_error("PushStack", "stack overflow")
-            }
 
-            machine->stack[machine->stack_idx++] = push_value;
-            machine->argc = 0;
-            machine->current_command = 0;
+            push_stack(push_value);
+            reset_command_vm();
         }
         break;
     default:
         break;
     }
 
-    return 2;
+    return 1;
 }

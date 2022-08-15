@@ -1,4 +1,5 @@
 #include "vm.c"
+#define DEBUG_MODE 1
 
 int main(int argc, char **argv)
 {
@@ -10,10 +11,9 @@ int main(int argc, char **argv)
     init_vm(file);
     run_vm();
 
-    printf("reg a: %d\n", machine->reg_a);
-    printf("reg b: %d\n", machine->reg_b);
-    printf("reg c: %d\n", machine->reg_c);
-    printf("stack 0: %d\n", machine->stack[0]);
+    if (DEBUG_MODE)
+        for (size_t index = 0; index < 256; index++)
+            printf("[stack + %lu]: %d\n", index, machine->stack[index]);
 
     free_vm();
 

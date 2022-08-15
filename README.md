@@ -19,7 +19,8 @@ L3IC-VM will be a bytecode virtual machine, I am planning to keep it simple and 
 - L3IC-VM commands should be easy-to-write and not confuse other people. Because i also think this is useful for Desktop/CLI Apps.
 - Using `gcc` for C compiler.
 - Uses big-endian for multibyte parameters.
-- Has three (3) registers. `A`, `B` and `C`. These register also made for commands input/output.
+- ~~Has three (3) registers. `A`, `B` and `C`. These register also made for commands input/output.~~
+    - Planning to remove registers due to complexity and extra byte for commands.
 - Planning to add stack. Stack can hold `128` 16-bit unsigned integer.
 
 ### IR Compiler
