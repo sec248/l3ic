@@ -7,8 +7,12 @@
 #define NO_COMMAND 0x00
 #define PUSH_STACK 0xA0
 #define POP_STACK 0xA1
-#define CURSOR_POS_X 0xA2
-#define CURSOR_POS_Y 0xA3
+
+#define CURSOR_GET_POS_X 0xB0
+#define CURSOR_GET_POS_Y 0xB1
+#define CURSOR_SET_POS_X 0xB2
+#define CURSOR_SET_POS_Y 0xB3
+#define CURSOR_SET_POS 0xB4
 
 #define vm_error(command, message)                              \
     fprintf(stderr, "[l3ic-vm : %s]: %s.\n", command, message); \
