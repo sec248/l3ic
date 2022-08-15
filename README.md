@@ -21,7 +21,7 @@ L3IC-VM will be a bytecode virtual machine, I am planning to keep it simple and 
 - Uses big-endian for multibyte parameters.
 - ~~Has three (3) registers. `A`, `B` and `C`. These register also made for commands input/output.~~
     - Planning to remove registers due to complexity and extra byte for commands.
-- Planning to add stack. Stack can hold `128` 16-bit unsigned integer.
+- Planning to add stack. Stack can hold `255` 16-bit unsigned integer.
 
 ### IR Compiler
 

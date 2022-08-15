@@ -54,6 +54,14 @@ int handle_command(uint8_t bytecode)
             pop_stack();
             reset_command_vm();
             break;
+        case CURSOR_POS_X:
+            push_stack(get_cursor_pos_x());
+            reset_command_vm();
+            break;
+        case CURSOR_POS_Y:
+            push_stack(get_cursor_pos_y());
+            reset_command_vm();
+            break;
         default:
             machine->current_command = bytecode;
             break;

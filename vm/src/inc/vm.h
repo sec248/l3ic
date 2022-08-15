@@ -2,12 +2,13 @@
 #define _VM_H
 
 #include "../reader.c"
-
-#include <windows.h>
+#include "../cursor.c"
 
 #define NO_COMMAND 0x00
 #define PUSH_STACK 0xA0
 #define POP_STACK 0xA1
+#define CURSOR_POS_X 0xA2
+#define CURSOR_POS_Y 0xA3
 
 #define vm_error(command, message)                              \
     fprintf(stderr, "[l3ic-vm : %s]: %s.\n", command, message); \
