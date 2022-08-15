@@ -10,8 +10,9 @@
 #define REG_C 0x03
 
 #define SET_REG 0x10
+#define PUSH_STACK 0x11
 
-#define vm_error(command, message)     \
+#define vm_error(command, message)                              \
     fprintf(stderr, "[l3ic-vm : %s]: %s.\n", command, message); \
     return -1;
 
@@ -20,10 +21,12 @@ typedef struct
     const char *source;
     uint8_t current_command;
     uint8_t argc;
-    uint8_t arguments[4];
+    uint8_t stack_idx;
     uint16_t reg_a;
     uint16_t reg_b;
     uint16_t reg_c;
+    uint8_t arguments[4];
+    uint16_t stack[128];
 } vm;
 
 _Bool init_vm(const char *);
