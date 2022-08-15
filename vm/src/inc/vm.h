@@ -5,9 +5,15 @@
 
 #include <windows.h>
 
-#define SET_REG_A 0xAA
-#define SET_REG_B 0xBB
-#define SET_REG_C 0xCC
+#define REG_A 0x01
+#define REG_B 0x02
+#define REG_C 0x03
+
+#define SET_REG 0x10
+
+#define vm_error(command, message)     \
+    fprintf(stderr, "[l3ic-vm : %s]: %s.\n", command, message); \
+    return -1;
 
 typedef struct
 {

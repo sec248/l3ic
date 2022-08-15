@@ -45,26 +45,27 @@ int handle_command(uint8_t bytecode)
 
     switch (machine->current_command)
     {
-    case SET_REG_A:
-    case SET_REG_B:
-    case SET_REG_C:
+    case SET_REG:
         machine->arguments[machine->argc++] = bytecode;
 
-        if (machine->argc == 2)
+        if (machine->argc == 3)
         {
-            uint16_t set_value = (machine->arguments[0] << 8) | machine->arguments[1];
+            uint8_t got_register = machine->arguments[0];
+            uint16_t set_value = (machine->arguments[1] << 8) | machine->arguments[2];
 
-            if (machine->current_command == SET_REG_A)
-            {
-                machine->reg_a = set_value;
-            }
-            else if (machine->current_command == SET_REG_B)
-            {
-                machine->reg_b = set_value;
-            }
-            else
-            {
-                machine->reg_c = set_value;
+            switch (got_register) {
+                case REG_A:
+                    machine->reg_a = set_value;
+                    break;
+                case REG_B:
+                    machine->reg_b = set_value;
+                    break;
+                case REG_C:
+                    machine->reg_c = set_value;
+                    break;
+                default:
+                    vm_error("SetReg", "unknown register")
+                    break;
             }
 
             machine->argc = 0;
