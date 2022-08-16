@@ -1,1 +1,1 @@
-gcc -std=c99 -o .\l3ic-vm .\src\main.c 
+gcc -O3 -Werror -Wall -fstack-protector -std=c99 -o .\l3ic-vm .\src\main.c 

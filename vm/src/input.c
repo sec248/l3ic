@@ -1,4 +1,4 @@
-#include "./inc/cursor.h"
+#include "./inc/input.h"
 
 uint16_t get_cursor_pos_x(void)
 {

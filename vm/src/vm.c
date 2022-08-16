@@ -95,6 +95,14 @@ int handle_command(uint8_t bytecode)
             __mouse_input(MOUSEEVENTF_RIGHTUP)
                 reset_command_vm();
             break;
+        case KEY_PRESS:
+            __keyboard_input(pop_stack(), NULL)
+                reset_command_vm();
+            break;
+        case KEY_RELEASE:
+            __keyboard_input(pop_stack(), 1)
+                reset_command_vm();
+            break;
         default:
             machine->current_command = bytecode;
             break;

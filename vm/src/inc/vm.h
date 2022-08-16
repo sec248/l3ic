@@ -2,7 +2,7 @@
 #define _VM_H
 
 #include "../reader.c"
-#include "../cursor.c"
+#include "../input.c"
 
 #define NO_COMMAND 0x00
 #define PUSH_STACK 0xA0
@@ -17,6 +17,8 @@
 #define MOUSE_LEFT_RELEASE 0xB6
 #define MOUSE_RIGHT_PRESS 0xB7
 #define MOUSE_RIGHT_RELEASE 0xB8
+#define KEY_PRESS 0xB9
+#define KEY_RELEASE 0xBA
 
 #define vm_error(command, message)                              \
     fprintf(stderr, "[l3ic-vm : %s]: %s.\n", command, message); \

@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 
     if (DEBUG_MODE)
         for (size_t index = 0; index < 256; index++)
-            printf("[stack + %lu]: %d\n", index, machine->stack[index]);
+            printf("[stack + %I64u]: %d\n", index, machine->stack[index]);
 
     free_vm();
 
