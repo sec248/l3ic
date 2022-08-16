@@ -54,6 +54,23 @@ int handle_command(uint8_t bytecode)
             pop_stack();
             reset_command_vm();
             break;
+        case DUP_STACK:
+        {
+            uint16_t last = pop_stack();
+            push_stack(last);
+            push_stack(last);
+        }
+            reset_command_vm();
+            break;
+        case SWAP_STACK:
+        {
+            uint16_t bottom = pop_stack();
+            uint16_t top = pop_stack();
+            push_stack(bottom);
+            push_stack(top);
+        }
+            reset_command_vm();
+            break;
         case CURSOR_GET_POS_X:
             push_stack(get_cursor_pos_x());
             reset_command_vm();

@@ -5,8 +5,11 @@
 #include "../input.c"
 
 #define NO_COMMAND 0x00
+
 #define PUSH_STACK 0xA0
 #define POP_STACK 0xA1
+#define DUP_STACK 0xA2
+#define SWAP_STACK 0xA3
 
 #define CURSOR_GET_POS_X 0xB0
 #define CURSOR_GET_POS_Y 0xB1
