@@ -44,12 +44,49 @@ void reset_command_vm(void)
 
 int handle_command(uint8_t bytecode)
 {
+    // check skip
+    if (machine->skip)
+    {
+        // check endif state
+        if (bytecode == ENDIF_STATE)
+        {
+            // check if reference count
+            if (machine->skip_refcheck == 1)
+            {
+                machine->skip = 0;
+            }
+            else if (machine->skip_refcheck == 0)
+            {
+                vm_error("EndIf", "no known if statement")
+            }
+
+            machine->skip_refcheck--;
+        }
+
+        // check if state
+        else if (bytecode == IF_STATE)
+        {
+            machine->skip_refcheck++;
+        }
+
+        return 1;
+    }
+
     switch (machine->current_command)
     {
     case NO_COMMAND:
         // all commands in this scope must be no argument commands
         switch (bytecode)
         {
+        case IF_STATE:
+            if (pop_stack() == 0)
+            {
+                machine->skip = 1;
+                machine->skip_refcheck = 1;
+            }
+            break;
+        case ENDIF_STATE:
+            break;
         case POP_STACK:
             pop_stack();
             reset_command_vm();

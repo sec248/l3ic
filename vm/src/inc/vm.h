@@ -23,17 +23,22 @@
 #define KEY_PRESS 0xB9
 #define KEY_RELEASE 0xBA
 
+#define IF_STATE 0xC0
+#define ENDIF_STATE 0xc1
+
 #define vm_error(command, message)                              \
     fprintf(stderr, "[l3ic-vm : %s]: %s.\n", command, message); \
     return -1;
 
 typedef struct
 {
+    _Bool skip;
     const char *source;
     uint8_t current_command;
     uint8_t argc;
     uint8_t stack_idx;
     uint8_t arguments[4];
+    size_t skip_refcheck;
     uint16_t stack[255];
 } vm;
 
