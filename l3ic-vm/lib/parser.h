@@ -5,24 +5,27 @@
 #include "bytecode.c"
 #include "opcodes.h"
 
-#include <stdint.h>
-
-#define reset_command(p) \
+#define reset_command { \
     parser->arg_index = 0; \
     parser->argc_to_collect = 0; \
-    parser->current_command = vm_null;
+    parser->current_command = vm_null; }
 
-typedef struct icvm_command {
+#define push_command { \
+    ic_command *command = calloc(1, sizeof(ic_command)); \
+    command->command = in; \
+    icarr_push(parser->commands, command); }
+
+typedef struct ic_command {
     uint8_t args[4];
     uint8_t command;
-} icvm_command;
+} ic_command;
 
-typedef struct icvm_jump {
+typedef struct ic_jump {
     size_t load_at;
     uint16_t jump_id;
-} icvm_jump;
+} ic_jump;
 
-typedef struct icvm_parser {
+typedef struct ic_parser {
     uint8_t current_args[4];
     ic_arr *commands;
     ic_arr *jump_table;
@@ -30,11 +33,12 @@ typedef struct icvm_parser {
     uint8_t current_command;
     uint8_t argc_to_collect;
     uint8_t arg_index;
-} icvm_parser;
+} ic_parser;
 
-icvm_parser *parser_init(ic_bytecode *source);
-void parser_run(icvm_parser *parser);
-void parser_collect(icvm_parser *parser, uint8_t in);
-void parser_collect_args(icvm_parser *parser, uint8_t in);
+ic_parser *parser_init(ic_bytecode *source);
+void parser_run(ic_parser *parser);
+void parser_collect(ic_parser *parser, uint8_t in);
+void parser_collect_args(ic_parser *parser, uint8_t in);
+void parser_free(ic_parser *parser);
 
 #endif
