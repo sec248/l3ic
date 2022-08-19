@@ -12,7 +12,10 @@ ic_vm *vm_init(ic_parser *parser) {
 
 void vm_run(ic_vm *vm) {
     while (vm->idx < vm->parser->commands->length) {
-        vm_handle(vm);
+        if (vm_handle(vm) == 0) {
+            break;
+        }
+
         vm->idx++;
     }
 }

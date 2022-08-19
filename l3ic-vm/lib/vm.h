@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 #define vm_error(command, message) \
-    fprintf(stderr, "[L3IC %% %s ]: %s.", command, message); \
+    fprintf(stderr, "[%s:%I64u]: %s.", command, vm->idx, message); \
     return 0;
 
 typedef struct ic_vm {
