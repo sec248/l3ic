@@ -9,6 +9,7 @@ L3IC (**L**ow **L**evel **L**anguage for **I**nput **C**ontrolling) allows you t
 </div>
 
 ## Plans
+**NOTE**: I'm unstable in general, so all of these can be changed in 1 minute.
 
 ### Virtual Machine
 
@@ -16,14 +17,14 @@ L3IC-VM will be a bytecode virtual machine, I am planning to keep it simple and 
 
 - ~~VM should mess with the bytecode source code only once. Commands will be executed char-by-char.~~
   - VM will process bytecode two times, this is because i am thinking to add jump label support.
-- ~~Planning to write in C99. L3IC-VM should directly use `windows.h` without any Wrappers or Libraries.~~
-  - Planning to rewrite in C# (yes, CSharp). The reason behind this is C# works well with windows api and has high-level features that i want.
+- Planning to write in C99. L3IC-VM should directly use `windows.h` without any Wrappers or Libraries.
+  -  ~~Planning to rewrite in C# (yes, CSharp). The reason behind this is C# works well with windows api and has high-level features that i want. ~~
 - L3IC-VM commands should be easy-to-write and not confuse other people..
-- ~~Using `gcc` for C compiler.~~
+- Using `gcc` for C compiler.
 - Uses big-endian for multibyte parameters.
 - Has five (5) registers. `A`, `B`, `C`, `D` and `E`. These register also made for commands input/output.
   - ~~Planning to remove registers due to complexity and extra byte for commands.~~
-- ~~Planning to add stack. Stack can hold `255` 16-bit unsigned integer.~~
+- Planning to add stack. Stack can hold `255` 16-bit unsigned integer.
 
 ### IR Compiler
 
