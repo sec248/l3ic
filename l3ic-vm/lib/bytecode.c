@@ -1,11 +1,11 @@
-#include "larr.h"
+#include "bytecode.h"
 
-larr *larr_init(void) {
-    larr *arr = malloc(sizeof(larr));
+ic_bytecode *bytecode_init(void) {
+    ic_bytecode *arr = malloc(sizeof(ic_bytecode));
     if (arr == NULL)
         return arr;
 
-    arr->capacity = LARR_PTRLEN * 256;
+    arr->capacity = 1024;
     arr->length = 0;
     arr->memory = malloc(arr->capacity);
 
@@ -17,8 +17,8 @@ larr *larr_init(void) {
     return arr;
 }
 
-uint8_t larr_push(larr *arr, void *ptr) {
-    if ((arr->capacity - (arr->length * LARR_PTRLEN)) == LARR_PTRLEN) {
+uint8_t bytecode_push(ic_bytecode *arr, uint8_t in) {
+    if ((arr->capacity - arr->length) <= 1) {
         arr->capacity *= 2;
         arr->memory = realloc(arr->memory, arr->capacity);
 
@@ -28,21 +28,15 @@ uint8_t larr_push(larr *arr, void *ptr) {
         }
     }
 
-    arr->memory[arr->length++] = ptr;
+    arr->memory[arr->length++] = in;
     return 1;
 }
 
-void* larr_get(larr *arr, size_t index) {
+uint8_t bytecode_get(ic_bytecode *arr, size_t index) {
     return arr->memory[index];
 }
 
-void larr_free(larr *arr) {
+void bytecode_free(ic_bytecode *arr) {
     free(arr->memory);
     free(arr);
-}
-
-void larr_free_in(larr *arr) {
-    for (size_t idx = 0; idx < arr->length; idx++) {
-        free(arr->memory[idx]);
-    }
 }

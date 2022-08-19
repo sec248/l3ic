@@ -1,16 +1,30 @@
 #ifndef _PARSER_H
 #define _PARSER_H
 
+#include "icarr.c"
+#include "bytecode.c"
+#include "opcodes.h"
+
 #include <stdint.h>
 
-typedef struct {
+typedef struct icvm_command {
     uint8_t args[4];
-    char command;
-} l3vm_command;
+    uint8_t command;
+} icvm_command;
 
-typedef struct {
-    char* source;
-    l3vm_command* commands;
-} l3vm_parser;
+typedef struct icvm_parser {
+    uint8_t current_args[4];
+    ic_arr *commands;
+    ic_arr *jump_table;
+    ic_bytecode *source;
+    uint8_t current_command;
+    uint8_t argc_to_collect;
+    uint8_t arg_index;
+} icvm_parser;
+
+icvm_parser *parser_init(ic_bytecode *source);
+void parser_run(icvm_parser *parser);
+void parser_collect(icvm_parser *parser, uint8_t in);
+void parser_collect_args(icvm_parser *parser, uint8_t in);
 
 #endif
