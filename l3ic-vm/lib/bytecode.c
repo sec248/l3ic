@@ -40,3 +40,19 @@ void bytecode_free(ic_bytecode *arr) {
     free(arr->memory);
     free(arr);
 }
+
+ic_bytecode *bytecode_from(uint8_t *arr, size_t length) {
+    ic_bytecode *bytecode = bytecode_init();
+    if (bytecode == NULL) {
+        return NULL;
+    }
+
+    for (size_t idx = 0; idx < length; idx++) {
+        if (bytecode_push(bytecode, arr[idx]) == 0) {
+            bytecode_free(bytecode);
+            return NULL;
+        }
+    }
+
+    return bytecode;
+}

@@ -14,5 +14,6 @@ ic_bytecode *bytecode_init(void);
 uint8_t bytecode_push(ic_bytecode *arr, uint8_t in);
 uint8_t bytecode_get(ic_bytecode *arr, size_t index);
 void bytecode_free(ic_bytecode *arr);
+ic_bytecode *bytecode_from(uint8_t *arr, size_t len);
 
 #endif

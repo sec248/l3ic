@@ -2,8 +2,10 @@
 #define _OPCODES_H
 
 typedef enum icvm_opcodes {
-    set_reg = 1,
-    swap_reg
+    vm_null,
+    set_reg,
+    swap_reg,
+    add_label
 } icvm_opcodes;
 
 #endif

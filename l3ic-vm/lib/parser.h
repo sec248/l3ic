@@ -7,10 +7,20 @@
 
 #include <stdint.h>
 
+#define reset_command(p) \
+    parser->arg_index = 0; \
+    parser->argc_to_collect = 0; \
+    parser->current_command = vm_null;
+
 typedef struct icvm_command {
     uint8_t args[4];
     uint8_t command;
 } icvm_command;
+
+typedef struct icvm_jump {
+    size_t load_at;
+    uint16_t jump_id;
+} icvm_jump;
 
 typedef struct icvm_parser {
     uint8_t current_args[4];
