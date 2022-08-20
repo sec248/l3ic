@@ -28,19 +28,20 @@ void parser_run(ic_parser *parser) {
 }
 
 void parser_collect(ic_parser *parser, uint8_t in) {
-    if (parser->current_command == 0) {
+    if (parser->current_command == vm_null) {
         parser->current_command = in;
 
         switch (in) {
             case vm_set_reg:
+            case vm_add_reg:
+            case vm_sub_reg:
+            case vm_mul_reg:
+            case vm_div_reg:
+            case vm_mod_reg:
                 parser->argc_to_collect = 3;
                 break;
             case vm_swap_reg:
-                parser->argc_to_collect = 2;
-                break;
-            case vm_add_label:
-                parser->argc_to_collect = 2;
-                break;
+            case vm_set_label:
             case vm_jump_label:
                 parser->argc_to_collect = 2;
                 break;
@@ -61,7 +62,7 @@ void parser_collect_args(ic_parser *parser, uint8_t in) {
     parser->current_args[parser->arg_index++] = in;
 
     if (parser->argc_to_collect == parser->arg_index) {
-        if (parser->current_command == vm_add_label) {
+        if (parser->current_command == vm_set_label) {
             ic_jump *jump = calloc(1, sizeof(ic_jump));
 
             jump->jump_id = (parser->current_args[0] << 8) | (parser->current_args[1] << 0);

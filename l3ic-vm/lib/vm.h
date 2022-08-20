@@ -4,6 +4,9 @@
 #include "parser.c"
 #include <stdio.h>
 
+#define UNKNOWN_REG_ID "unknown register id"
+#define UNKNOWN_LABEL_ID "unknown label id"
+
 #define vm_error(command, message) \
     fprintf(stderr, "[%s:%I64u]: %s.", command, vm->idx, message); \
     return 0;

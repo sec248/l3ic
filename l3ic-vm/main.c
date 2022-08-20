@@ -1,7 +1,7 @@
 #include "./lib/vm.c"
 #include <stdio.h>
 
-static uint8_t debug_bc[] = { 
+static uint8_t debug_bc[] = /* { 
     // set reg i to 1 so can jump
     0x01, 0x06, 0x00, 0x01,
     // test set reg
@@ -16,10 +16,15 @@ static uint8_t debug_bc[] = {
     0xff,
     // jump label
     0x04, 0x00, 0x00,
+}; */ {
+    vm_set_reg, 0x02, 0x00, 0xFF,
+    vm_dump_info,
+    vm_mod_reg, 0x02, 0x00, 0x02,
+    vm_dump_info,
 };
 
 int main(void) {
-    ic_bytecode *bytecode = bytecode_from(debug_bc, 22);
+    ic_bytecode *bytecode = bytecode_from(debug_bc, 10);
     if (bytecode == NULL) {
         return 1;
     }
@@ -29,6 +34,11 @@ int main(void) {
         return 1;
     }
     parser_run(parser);
+
+    for (size_t idx = 0; idx < parser->commands->length; idx++) {
+        ic_command *command = (ic_command *)parser->commands->memory[idx];
+        printf("command: %d, args: %d %d %d %d\n", command->command, command->args[0], command->args[1], command->args[2], command->args[3]);
+    }
 
     ic_vm *vm = vm_init(parser);
     if (vm == NULL) {

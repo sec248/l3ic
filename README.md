@@ -24,7 +24,7 @@ L3IC-VM will be a bytecode virtual machine, I am planning to keep it simple and 
 - Uses big-endian for multibyte parameters.
 - Has seven (7) registers. `A`, `B`, `C`, `X`, `Y`, `Z` and `I`.
   - `A`, `B` and `C` is for general usage.
-  - `X`, `Y` `Z` is for command i/o. 
+  - `X`, `Y` and `Z` is for command i/o. 
   - `I` is a special register for jump commands and comparison commands.
   - ~~Planning to remove registers due to complexity and extra byte for commands.~~
 - Planning to add stack. Stack can hold `255` 16-bit unsigned integer.

@@ -28,7 +28,7 @@ uint8_t vm_handle(ic_vm *vm) {
             uint8_t reg = command->args[0];
 
             if (reg > 6) {
-                vm_error("SetReg", "unknown register id")
+                vm_error("SetReg", UNKNOWN_REG_ID)
             }
 
             uint16_t value = (command->args[1] << 8) | (command->args[2] << 0);
@@ -40,7 +40,7 @@ uint8_t vm_handle(ic_vm *vm) {
             uint8_t reg2 = command->args[1];
 
             if (reg1 > 6 || reg2 > 6) {
-                vm_error("SwapReg", "unknown register id")
+                vm_error("SwapReg", UNKNOWN_REG_ID)
             }
 
             uint16_t temp = vm->registers[reg1];
@@ -63,7 +63,62 @@ uint8_t vm_handle(ic_vm *vm) {
                 }
             }
 
-            vm_error("JumpLabel", "unknown label id")
+            vm_error("JumpLabel", UNKNOWN_LABEL_ID)
+            break;
+        }
+        case vm_add_reg: {
+            uint8_t reg = command->args[0];
+
+            if (reg > 6) {
+                vm_error("AddReg", UNKNOWN_REG_ID)
+            }
+
+            uint16_t value = (command->args[1] << 8) | (command->args[2] << 0);
+            vm->registers[reg] += value;
+            break;
+        }
+        case vm_sub_reg: {
+            uint8_t reg = command->args[0];
+
+            if (reg > 6) {
+                vm_error("SubReg", UNKNOWN_REG_ID)
+            }
+
+            uint16_t value = (command->args[1] << 8) | (command->args[2] << 0);
+            vm->registers[reg] -= value;
+            break;
+        }
+        case vm_mul_reg: {
+            uint8_t reg = command->args[0];
+
+            if (reg > 6) {
+                vm_error("MulReg", UNKNOWN_REG_ID)
+            }
+
+            uint16_t value = (command->args[1] << 8) | (command->args[2] << 0);
+            vm->registers[reg] *= value;
+            break;
+        }
+        case vm_div_reg: {
+            uint8_t reg = command->args[0];
+
+            if (reg > 6) {
+                vm_error("DivReg", UNKNOWN_REG_ID)
+            }
+
+            uint16_t value = (command->args[1] << 8) | (command->args[2] << 0);
+            vm->registers[reg] /= value;
+            break;
+        }
+        case vm_mod_reg: {
+            uint8_t reg = command->args[0];
+
+            if (reg > 6) {
+                vm_error("ModReg", UNKNOWN_REG_ID)
+            }
+
+            uint16_t value = (command->args[1] << 8) | (command->args[2] << 0);
+            vm->registers[reg] = vm->registers[reg] % value;
             break;
         }
         case vm_dump_info: {
