@@ -2,6 +2,7 @@
 
 void x11_init(void) {
     disp = XOpenDisplay(0);
+	rwin = XRootWindow(disp, XDefaultScreen(disp));
 }
 
 void mouse_move(uint16_t x, uint16_t y) {
@@ -28,4 +29,18 @@ void mouse_event(ic_mouse_c in) {
     }
 
     XFlush(disp);
+}
+
+ic_cur_pos mouse_get_cursor(void) {
+    int win_x, win_y, root_x, root_y = 0;
+    unsigned int mask = 0;
+    Window child_win, root_win;
+    XQueryPointer(disp, rwin, &child_win, &root_win, &root_x, &root_y, &win_x, &win_y, &mask);
+
+    ic_cur_pos cursor_pos = {
+        .x = root_x,
+        .y = root_y
+    };
+
+    return cursor_pos;
 }

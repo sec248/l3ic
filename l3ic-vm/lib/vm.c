@@ -96,6 +96,13 @@ uint8_t vm_handle(ic_vm *vm) {
             mouse_event(14 - command->command);
             break;
         }
+        case vm_mouse_pos: {
+            ic_cur_pos pos = mouse_get_cursor();
+
+            vm->registers[REG_X] = pos.x;
+            vm->registers[REG_Y] = pos.y;
+            break;
+        }
         case vm_dump_info: {
             printf("~[ L3IC DEBUG INFORMATIONS ]~\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nRegA = %d\nRegB = %d\nRegC = %d\nRegX = %d\nRegY = %d\nRegZ = %d\nRegI = %d\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n",
                 vm->registers[REG_A],
