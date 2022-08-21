@@ -1,5 +1,5 @@
 #include "vm.h"
-#include "x11.c"
+#include "input.c"
 
 ic_vm *vm_init(ic_parser *parser) {
     ic_vm *vm = calloc(1, sizeof(ic_vm));
@@ -89,11 +89,17 @@ uint8_t vm_handle(ic_vm *vm) {
             mouse_move(mouse_x, mouse_y);
             break;
         }
+        case vm_mouse_scrolld_up:
+        case vm_mouse_scrolld_down:
+        case vm_mouse_scrollu_up:
+        case vm_mouse_scrollu_down:
+        case vm_mouse_middle_up:
+        case vm_mouse_middle_down:
         case vm_mouse_right_up:
         case vm_mouse_right_down:
         case vm_mouse_left_up:
         case vm_mouse_left_down: {
-            mouse_event(14 - command->command);
+            mouse_event(20 - command->command);
             break;
         }
         case vm_mouse_pos: {

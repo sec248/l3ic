@@ -4,7 +4,7 @@
 
 ![Logo](/assets/l3ic.png)
 
-L3IC (**L**ow **L**evel **L**anguage for **I**nput **C**ontrolling) allows you to control mouse and keyboard input on X11.
+L3IC (**L**ow **L**evel **L**anguage for **I**nput **C**ontrolling) allows you to control mouse and keyboard input on Windows and Linux (X11).
 
 </div>
 
@@ -17,7 +17,7 @@ L3IC-VM will be a bytecode virtual machine, I am planning to keep it simple and 
 
 - ~~VM should mess with the bytecode source code only once. Commands will be executed char-by-char.~~
   - VM will process bytecode two times, this is because i am thinking to add jump label support.
-- Planning to write in C99. L3IC-VM should directly use `Xlib` without any Wrappers or Libraries.
+- Planning to write in C99. L3IC-VM should directly use header libs without any Wrappers or Libraries.
   -  ~~Planning to rewrite in C# (yes, CSharp). The reason behind this is C# works well with windows api and has high-level features that i want.~~
 - L3IC-VM commands should be easy-to-write and not confuse other people..
 - Using `gcc` for C compiler.
@@ -33,7 +33,7 @@ L3IC-VM will be a bytecode virtual machine, I am planning to keep it simple and 
 
 L3IC-IR is an intermediate representation compiler for L3IC-VM.
 
-- Planning to write in Rust. Since L3IC-IR will convert the given source to bytecode, it doesn't need to use any Xlib related functions.
+- Planning to write in Rust. Since L3IC-IR will convert the given source to bytecode, it doesn't need to use any m/k input related functions.
 - Planning to use pascal-case (`ThisIsPascalCase`).
 - Planning to add pre-processor.
 
@@ -48,8 +48,16 @@ L3IC-DE is a decompiler for L3IC-VM. Will decompile given bytecode to an interme
 
 L3IC-MC is a macro creator for L3IC-VM that allows you to create macros easily.
 
-- Planning to write in Vala.
 - Macro creator will not be in focus until L3IC reaches a certain point.
+
+#### Linux
+
+- Planning to write in Vala.
+
+#### Windows
+
+- Planning to write in CSharp.
+
 
 ## Pull Requests
 

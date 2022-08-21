@@ -18,6 +18,12 @@ typedef enum ic_opcodes {
     vm_mouse_right_down,
     vm_mouse_left_up,
     vm_mouse_left_down,
+    vm_mouse_middle_up,
+    vm_mouse_middle_down,
+    vm_mouse_scrolld_up,
+    vm_mouse_scrolld_down,
+    vm_mouse_scrollu_up,
+    vm_mouse_scrollu_down,
     // opcodes above are constant, which means you shouldn't change that.
     vm_mouse_pos,
     vm_dump_info = 255
