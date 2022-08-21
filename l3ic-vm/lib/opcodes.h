@@ -12,6 +12,7 @@ typedef enum ic_opcodes {
     vm_mod_reg,
     vm_set_label,
     vm_jump_label,
+    vm_mouse_move,
     vm_dump_info = 255
 } ic_opcodes;
 

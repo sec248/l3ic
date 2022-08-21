@@ -1,4 +1,5 @@
 #include "vm.h"
+#include "x11.c"
 
 ic_vm *vm_init(ic_parser *parser) {
     ic_vm *vm = calloc(1, sizeof(ic_vm));
@@ -27,7 +28,7 @@ uint8_t vm_handle(ic_vm *vm) {
         case vm_set_reg: {
             uint8_t reg = command->args[0];
 
-            if (reg > 6) {
+            if (reg > REG_COUNT - 1) {
                 vm_error("SetReg", UNKNOWN_REG_ID)
             }
 
@@ -39,7 +40,7 @@ uint8_t vm_handle(ic_vm *vm) {
             uint8_t reg1 = command->args[0];
             uint8_t reg2 = command->args[1];
 
-            if (reg1 > 6 || reg2 > 6) {
+            if (reg1 > REG_COUNT - 1 || reg2 > REG_COUNT - 1) {
                 vm_error("SwapReg", UNKNOWN_REG_ID)
             }
 
@@ -55,7 +56,7 @@ uint8_t vm_handle(ic_vm *vm) {
                 ic_jump *jump = (ic_jump *)vm->parser->jump_table->memory[jidx];
 
                 if (jump->jump_id == jump_id) {
-                    if (vm->registers[6] != 0) {
+                    if (vm->registers[REG_I] != 0) {
                         vm->idx = jump->load_at;
                     }
 
@@ -67,69 +68,35 @@ uint8_t vm_handle(ic_vm *vm) {
             break;
         }
         case vm_add_reg: {
-            uint8_t reg = command->args[0];
-
-            if (reg > 6) {
-                vm_error("AddReg", UNKNOWN_REG_ID)
-            }
-
-            uint16_t value = (command->args[1] << 8) | (command->args[2] << 0);
-            vm->registers[reg] += value;
-            break;
+            __vm_math_h("AddReg", +)
         }
         case vm_sub_reg: {
-            uint8_t reg = command->args[0];
-
-            if (reg > 6) {
-                vm_error("SubReg", UNKNOWN_REG_ID)
-            }
-
-            uint16_t value = (command->args[1] << 8) | (command->args[2] << 0);
-            vm->registers[reg] -= value;
-            break;
+            __vm_math_h("SubReg", -)
         }
         case vm_mul_reg: {
-            uint8_t reg = command->args[0];
-
-            if (reg > 6) {
-                vm_error("MulReg", UNKNOWN_REG_ID)
-            }
-
-            uint16_t value = (command->args[1] << 8) | (command->args[2] << 0);
-            vm->registers[reg] *= value;
-            break;
+            __vm_math_h("MulReg", *)
         }
         case vm_div_reg: {
-            uint8_t reg = command->args[0];
-
-            if (reg > 6) {
-                vm_error("DivReg", UNKNOWN_REG_ID)
-            }
-
-            uint16_t value = (command->args[1] << 8) | (command->args[2] << 0);
-            vm->registers[reg] /= value;
-            break;
+            __vm_math_h("DivReg", /)
         }
         case vm_mod_reg: {
-            uint8_t reg = command->args[0];
+            __vm_math_h("ModReg", %)
+        }
+        case vm_mouse_move: {
+            uint16_t mouse_x = vm->registers[REG_X];
+            uint16_t mouse_y = vm->registers[REG_Y];
 
-            if (reg > 6) {
-                vm_error("ModReg", UNKNOWN_REG_ID)
-            }
-
-            uint16_t value = (command->args[1] << 8) | (command->args[2] << 0);
-            vm->registers[reg] = vm->registers[reg] % value;
-            break;
+            move_mouse(mouse_x, mouse_y);
         }
         case vm_dump_info: {
             printf("~[ L3IC DEBUG INFORMATIONS ]~\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nRegA = %d\nRegB = %d\nRegC = %d\nRegX = %d\nRegY = %d\nRegZ = %d\nRegI = %d\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n",
-                vm->registers[0],
-                vm->registers[1],
-                vm->registers[2],
-                vm->registers[3],
-                vm->registers[4],
-                vm->registers[5],
-                vm->registers[6]
+                vm->registers[REG_A],
+                vm->registers[REG_B],
+                vm->registers[REG_C],
+                vm->registers[REG_X],
+                vm->registers[REG_Y],
+                vm->registers[REG_Z],
+                vm->registers[REG_I]
             );
             break;
         }
