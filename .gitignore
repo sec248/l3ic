@@ -1,6 +1,5 @@
 *.bak
-*.exe
-*.dll
 *.obj
 *.o
 .vscode
+./l3ic-vm/l3ic-vm

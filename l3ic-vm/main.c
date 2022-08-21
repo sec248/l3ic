@@ -17,16 +17,18 @@ static uint8_t debug_bc[] = /* {
     // jump label
     0x04, 0x00, 0x00,
 }; */ {
-    vm_set_reg, REG_X, 0x00, 0xFF,
-    vm_set_reg, REG_Y, 0x02, 0x00,
-    vm_dump_info,
+    vm_set_reg, REG_X, 0x02, 0xFF,
+    vm_set_reg, REG_Y, 0x00, 0xFF,
     vm_mouse_move,
+    vm_mouse_right_down,
+    vm_mouse_right_up,
+    vm_dump_info,
 };
 
 int main(void) {
     x11_init();
 
-    ic_bytecode *bytecode = bytecode_from(debug_bc, 10);
+    ic_bytecode *bytecode = bytecode_from(debug_bc, 12);
     if (bytecode == NULL) {
         return 1;
     }
