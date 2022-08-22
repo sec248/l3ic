@@ -49,6 +49,11 @@ void mouse_event(ic_mouse_c in) {
     XFlush(disp);
 }
 
+void keyboard_event(unsigned in, _Bool press) {
+    XTestFakeKeyEvent(disp, XKeysymToKeycode(disp, in), press, CurrentTime);
+    XFlush(disp);
+}
+
 ic_cur_pos mouse_get_cursor(void) {
     int win_x, win_y, root_x, root_y = 0;
     unsigned int mask = 0;

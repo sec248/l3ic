@@ -19,14 +19,15 @@ static uint8_t debug_bc[] = /* {
 }; */ {
     vm_mouse_pos,
     vm_dump_info,
-    vm_mouse_scrollu_up,
-    vm_mouse_scrollu_down,
+    vm_set_reg, REG_X, 0x00, XK_A,
+    vm_key_press,
+    vm_key_release,
 };
 
 int main(void) {
     input_init();
 
-    ic_bytecode *bytecode = bytecode_from(debug_bc, 4);
+    ic_bytecode *bytecode = bytecode_from(debug_bc, 8);
     if (bytecode == NULL) {
         return 1;
     }

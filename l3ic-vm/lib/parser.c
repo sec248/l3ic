@@ -45,6 +45,8 @@ void parser_collect(ic_parser *parser, uint8_t in) {
             case vm_jump_label:
                 parser->argc_to_collect = 2;
                 break;
+            case vm_key_press:
+            case vm_key_release:
             case vm_mouse_pos:
             case vm_mouse_scrolld_up:
             case vm_mouse_scrolld_down:

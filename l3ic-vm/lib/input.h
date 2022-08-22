@@ -28,6 +28,7 @@ static Window rwin;
 void input_init(void);
 void mouse_move(uint16_t x, uint16_t y);
 void mouse_event(ic_mouse_c in);
+void keyboard_event(unsigned in, _Bool press);
 ic_cur_pos mouse_get_cursor(void);
 void input_free(void);
 

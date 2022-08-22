@@ -109,6 +109,14 @@ uint8_t vm_handle(ic_vm *vm) {
             vm->registers[REG_Y] = pos.y;
             break;
         }
+        case vm_key_press: {
+            keyboard_event(vm->registers[REG_X], 1);
+            break;
+        }
+        case vm_key_release: {
+            keyboard_event(vm->registers[REG_X], 0);
+            break;
+        }
         case vm_dump_info: {
             printf("~[ L3IC DEBUG INFORMATIONS ]~\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nRegA = %d\nRegB = %d\nRegC = %d\nRegX = %d\nRegY = %d\nRegZ = %d\nRegI = %d\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n",
                 vm->registers[REG_A],
