@@ -1,6 +1,6 @@
 #include "./lib/vm.c"
 #include <stdio.h>
-
+#include <X11/keysym.h>
 static uint8_t debug_bc[] = /* { 
     // set reg i to 1 so can jump
     0x01, 0x06, 0x00, 0x01,
@@ -35,7 +35,7 @@ int main(void) {
     if (parser == NULL) {
         return 1;
     }
-    
+
     parser_run(parser);
 
     ic_vm *vm = vm_init(parser);

@@ -1,6 +1,5 @@
 #include "input.h"
 
-#if defined(__linux__)
 void input_init(void) {
     disp = XOpenDisplay(0);
 	rwin = XRootWindow(disp, XDefaultScreen(disp));
@@ -70,35 +69,3 @@ void input_free(void) {
     disp = None;
 	rwin = None;
 }
-
-#elif defined(_WIN32)
-
-void input_init(void) {
-    return;
-}
-
-void mouse_move(uint16_t x, uint16_t y) {
-    SetCursorPos(x, y);
-}
-
-void mouse_event(ic_mouse_c in) {
-    return;
-}
-
-ic_cur_pos mouse_get_cursor(void) {
-    POINT out;
-    GetCursorPos(&out);
-
-    ic_cur_pos cursor_pos = {
-        .x = out.x,
-        .y = out.y
-    };
-
-    return cursor_pos;
-}
-
-void input_free(void) {
-    return;
-}
-
-#endif

@@ -4,7 +4,7 @@
 
 ![Logo](/assets/l3ic.png)
 
-L3IC (**L**ow **L**evel **L**anguage for **I**nput **C**ontrolling) allows you to control mouse and keyboard input on Windows and Linux (X11).
+L3IC (**L**ow **L**evel **L**anguage for **I**nput **C**ontrolling) allows you to control mouse and keyboard input on Linux (X11).
 
 </div>
 
@@ -49,15 +49,7 @@ L3IC-DE is a decompiler for L3IC-VM. Will decompile given bytecode to an interme
 L3IC-MC is a macro creator for L3IC-VM that allows you to create macros easily.
 
 - Macro creator will not be in focus until L3IC reaches a certain point.
-
-#### Linux
-
 - Planning to write in Vala.
-
-#### Windows
-
-- Planning to write in CSharp.
-
 
 ## Pull Requests
 

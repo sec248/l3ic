@@ -4,14 +4,16 @@
 #include "parser.c"
 #include <stdio.h>
 
-#define REG_A 0
-#define REG_B 1
-#define REG_C 2
-#define REG_X 3
-#define REG_Y 4
-#define REG_Z 5
-#define REG_I 6
-#define REG_COUNT 7
+enum {
+    REG_A = 0,
+    REG_B,
+    REG_C,
+    REG_X,
+    REG_Y,
+    REG_Z,
+    REG_I,
+    REG_COUNT
+};
 
 #define UNKNOWN_REG_ID "unknown register id"
 #define UNKNOWN_LABEL_ID "unknown label id"
