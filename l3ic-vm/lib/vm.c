@@ -49,6 +49,17 @@ uint8_t vm_handle(ic_vm *vm) {
             vm->registers[reg2] = temp;
             break;
         }
+        case vm_copy_reg: {
+            uint8_t reg1 = command->args[0];
+            uint8_t reg2 = command->args[1];
+
+            if (reg1 > REG_COUNT - 1 || reg2 > REG_COUNT - 1) {
+                vm_error("CopyReg", UNKNOWN_REG_ID)
+            }
+
+            vm->registers[reg1] = vm->registers[reg2];
+            break;
+        }
         case vm_jump_label: {
             uint16_t jump_id = (command->args[0] << 8) | (command->args[1] << 0);
 

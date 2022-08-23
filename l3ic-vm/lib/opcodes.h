@@ -5,6 +5,7 @@ typedef enum ic_opcodes {
     vm_null,
     vm_set_reg,
     vm_swap_reg,
+    vm_copy_reg,
     vm_add_reg,
     vm_sub_reg,
     vm_mul_reg,
