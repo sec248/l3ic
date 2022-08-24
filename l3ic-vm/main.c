@@ -23,15 +23,15 @@ static uint8_t debug_bc[] = /* {
     vm_key_release,
 }; */
 {
-    vm_set_reg, REG_X, 0x00, 0xFF,
-    vm_stack_push, 0xFF, 0x00,
-    vm_stack_push_reg, REG_X,
-    vm_stack_push, 0x13, 0x37,
-    vm_stack_pop, REG_A,
-    vm_stack_pop, REG_B,
-    vm_stack_pop, REG_Z,
-    vm_stack_pop, REG_X,
-    vm_dump_info
+    vm_set_reg, REG_X, 0x02, 0xFF,
+    vm_set_reg, REG_Y, 0x00, 0x16,
+    vm_dump_info,
+    vm_get_pixel_rgb,
+    vm_dump_info,
+    vm_set_reg, REG_X, 0x02, 0xFF,
+    vm_set_reg, REG_Y, 0x00, 0x69,
+    vm_get_pixel_rgb,
+    vm_dump_info,
 };
 
 int main(void) {

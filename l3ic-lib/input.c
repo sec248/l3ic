@@ -68,6 +68,25 @@ ic_cur_pos mouse_get_cursor(void) {
     return cursor_pos;
 }
 
+ic_pixel get_screen_pixel(uint16_t x, uint16_t y) {
+    XColor color;
+    XImage *image;
+
+    image = XGetImage(disp, XRootWindow(disp, XDefaultScreen(disp)), x, y, 1, 1, AllPlanes, XYPixmap);
+    color.pixel = XGetPixel(image, 0, 0);
+    XFree(image);
+
+    XQueryColor (disp, XDefaultColormap(disp, XDefaultScreen(disp)), &color);
+    
+    ic_pixel pixel = {
+        .r = color.red / 256,
+        .g = color.green / 256,
+        .b = color.blue / 256
+    };
+
+    return pixel;
+}
+
 void input_free(void) {
     XCloseDisplay(disp);
 

@@ -155,6 +155,17 @@ uint8_t vm_handle(ic_vm *vm) {
             vm->registers[to_reg] = popped;
             break;
         }
+        case vm_get_pixel_rgb: {
+            uint16_t pos_x = vm->registers[REG_X];
+            uint16_t pos_y = vm->registers[REG_Y];
+
+            ic_pixel result = get_screen_pixel(pos_x, pos_y);
+
+            vm->registers[REG_X] = result.r;
+            vm->registers[REG_Y] = result.g;
+            vm->registers[REG_Z] = result.b;
+            break;
+        }
         case vm_dump_info: {
             printf("~[ L3IC DEBUG INFORMATIONS ]~\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nRegA = %d\nRegB = %d\nRegC = %d\nRegX = %d\nRegY = %d\nRegZ = %d\nRegI = %d\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n",
                 vm->registers[REG_A],

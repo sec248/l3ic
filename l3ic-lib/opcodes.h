@@ -32,6 +32,7 @@ typedef enum ic_opcodes {
     vm_stack_push_reg,
     vm_stack_pop,
     vm_mouse_pos,
+	vm_get_pixel_rgb,
     vm_dump_info = 255
 } ic_opcodes;
 
