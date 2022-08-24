@@ -1,6 +1,4 @@
-#include "./lib/vm.c"
-#include <stdio.h>
-#include <X11/keysym.h>
+#include "../l3ic-lib/include.h"
 
 static uint8_t debug_bc[] = /* { 
     // set reg i to 1 so can jump
