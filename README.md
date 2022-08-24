@@ -11,45 +11,45 @@ L3IC (**L**ow **L**evel **L**anguage for **I**nput **C**ontrolling) allows you t
 ## Plans
 **NOTE**: I'm unstable in general, so all of these can be changed in 1 minute.
 
+### Library
+
+L3IC-LIB contains everything you need including parser and virtual machine (and also will add compiler and decompiler). Other sub-projects are actually a frontend of this library.
+
+Library itself is written in C and has a simple to use api.
+
 ### Virtual Machine
 
-L3IC-VM will be a bytecode virtual machine, I am planning to keep it simple and efficient.
+L3IC-VM is a bytecode virtual machine for L3IC.
 
-- ~~VM should mess with the bytecode source code only once. Commands will be executed char-by-char.~~
-  - VM will process bytecode two times, this is because i am thinking to add jump label support.
-- Planning to write in C99. L3IC-VM should directly use header libs without any Wrappers or Libraries.
-  -  ~~Planning to rewrite in C# (yes, CSharp). The reason behind this is C# works well with windows api and has high-level features that i want.~~
-- L3IC-VM commands should be easy-to-write and not confuse other people..
-- Using `gcc` for C compiler.
+- Has jump table, which means you can jump anywhere in your program at execution time.
 - Uses big-endian for multibyte parameters.
 - Has seven (7) registers. `A`, `B`, `C`, `X`, `Y`, `Z` and `I`.
   - `A`, `B` and `C` is for general usage.
   - `X`, `Y` and `Z` is for command i/o. 
   - `I` is a special register for jump commands and comparison commands.
-  - ~~Planning to remove registers due to complexity and extra byte for commands.~~
-- Planning to add stack. Stack can hold `255` 16-bit unsigned integer.
+- Support stacks. Stack can hold `255` 16-bit unsigned integer.
 
 ### IR Compiler
 
-L3IC-IR is an intermediate representation compiler for L3IC-VM.
+L3IC-IRC is an intermediate representation compiler that converts into L3IC bytecode.
 
-- Planning to write in Rust. Since L3IC-IR will convert the given source to bytecode, it doesn't need to use any m/k input related functions.
+- Planning to write in C.
 - Planning to use pascal-case (`ThisIsPascalCase`).
 - Planning to add pre-processor.
 
-### Decompiler
+### Bytecode Decompiler
 
-L3IC-DE is a decompiler for L3IC-VM. Will decompile given bytecode to an intermediate representation.
+L3IC-BDE is a decompiler for L3IC bytecode that converts your program to intermediate representation.
 
-- Planning to write in Rust.
+- Planning to write in C.
 - Decompiler will not be in focus until L3IC reaches a certain point.
 
 ### Macro Creator
 
-L3IC-MC is a macro creator for L3IC-VM that allows you to create macros easily.
+L3IC-MC is a macro creator for L3IC that allows you to create macros easily.
 
-- Macro creator will not be in focus until L3IC reaches a certain point.
 - Planning to write in Vala.
+- Macro creator will not be in focus until L3IC reaches a certain point.
 
 ## Pull Requests
 
