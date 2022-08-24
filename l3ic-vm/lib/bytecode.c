@@ -3,7 +3,7 @@
 ic_bytecode *bytecode_init(void) {
     ic_bytecode *arr = malloc(sizeof(ic_bytecode));
     if (arr == NULL)
-        return arr;
+        return NULL;
 
     arr->capacity = 1024;
     arr->length = 0;

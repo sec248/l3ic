@@ -40,11 +40,16 @@ void parser_collect(ic_parser *parser, uint8_t in) {
             case vm_mod_reg:
                 parser->argc_to_collect = 3;
                 break;
+            case vm_stack_push:
             case vm_copy_reg:
             case vm_swap_reg:
             case vm_set_label:
             case vm_jump_label:
                 parser->argc_to_collect = 2;
+                break;
+            case vm_stack_pop:
+            case vm_stack_push_reg:
+                parser->argc_to_collect = 1;
                 break;
             case vm_key_press:
             case vm_key_release:

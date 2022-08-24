@@ -30,9 +30,11 @@ enum {
     break; \
 
 typedef struct ic_vm {
+    uint16_t stack[256];
     uint16_t registers[7];
     ic_parser *parser;
     size_t idx;
+    uint8_t stack_idx;
 } ic_vm;
 
 ic_vm *vm_init(ic_parser *parser);

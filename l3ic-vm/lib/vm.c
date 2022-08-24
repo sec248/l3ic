@@ -110,7 +110,7 @@ uint8_t vm_handle(ic_vm *vm) {
         case vm_mouse_right_down:
         case vm_mouse_left_up:
         case vm_mouse_left_down: {
-            mouse_event(20 - command->command);
+            mouse_event(21 - command->command);
             break;
         }
         case vm_mouse_pos: {
@@ -126,6 +126,33 @@ uint8_t vm_handle(ic_vm *vm) {
         }
         case vm_key_release: {
             keyboard_event(vm->registers[REG_X], 0);
+            break;
+        }
+        case vm_stack_push: {
+            uint16_t number = (command->args[0] << 8) | (command->args[1] << 0);
+            vm->stack[vm->stack_idx++] = number;
+            break;
+        }
+        case vm_stack_push_reg: {
+            uint8_t from_reg = command->args[0];
+
+            if (from_reg > REG_COUNT - 1) {
+                vm_error("StackPushReg", UNKNOWN_REG_ID)
+            }
+
+            vm->stack[vm->stack_idx++] = vm->registers[from_reg];
+            break;
+        }
+        case vm_stack_pop: {
+            uint8_t to_reg = command->args[0];
+
+            if (to_reg > REG_COUNT - 1) {
+                vm_error("StackPop", UNKNOWN_REG_ID)
+            }
+
+            uint16_t popped = vm->stack[--vm->stack_idx];
+            vm->stack[vm->stack_idx] = 0;
+            vm->registers[to_reg] = popped;
             break;
         }
         case vm_dump_info: {

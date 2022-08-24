@@ -26,15 +26,20 @@ static uint8_t debug_bc[] = /* {
 }; */
 {
     vm_set_reg, REG_X, 0x00, 0xFF,
-    vm_dump_info,
-    vm_copy_reg, REG_Y, REG_X,
+    vm_stack_push, 0xFF, 0x00,
+    vm_stack_push_reg, REG_X,
+    vm_stack_push, 0x13, 0x37,
+    vm_stack_pop, REG_A,
+    vm_stack_pop, REG_B,
+    vm_stack_pop, REG_Z,
+    vm_stack_pop, REG_X,
     vm_dump_info
 };
 
 int main(void) {
     input_init();
 
-    ic_bytecode *bytecode = bytecode_from(debug_bc, 9);
+    ic_bytecode *bytecode = bytecode_from(debug_bc, 21);
     if (bytecode == NULL) {
         return 1;
     }

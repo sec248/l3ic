@@ -28,6 +28,9 @@ typedef enum ic_opcodes {
     // opcodes above are constant, which means you shouldn't change that.
     vm_key_press,
     vm_key_release,
+    vm_stack_push,
+    vm_stack_push_reg,
+    vm_stack_pop,
     vm_mouse_pos,
     vm_dump_info = 255
 } ic_opcodes;

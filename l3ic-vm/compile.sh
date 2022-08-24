@@ -1,1 +1,1 @@
-gcc -O3 -Werror -Wall -fstack-protector -std=c99 -o ./l3ic-vm ./main.c  -lX11 -lXtst
+gcc -Os -s -Werror -Wall -fstack-protector -std=c99 -o ./l3ic-vm ./main.c  -lX11 -lXtst

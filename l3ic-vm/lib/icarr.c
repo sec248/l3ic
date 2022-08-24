@@ -3,7 +3,7 @@
 ic_arr *icarr_init(void) {
     ic_arr *arr = malloc(sizeof(ic_arr));
     if (arr == NULL)
-        return arr;
+        return NULL;
 
     arr->capacity = sizeof(void *) * 256;
     arr->length = 0;
