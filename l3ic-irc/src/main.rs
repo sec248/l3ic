@@ -3,11 +3,15 @@ pub mod compiler;
 fn main() {
     let mut compiler = compiler::Compiler::new(
         r#"
-    Label XD2
+    SetRegister RI 0001
     Label Hello
-    SetRegister RI FF00
+    StackPush FFFF
+    SetRegister RA 6969
+    StackPushRegister RA
+    StackPop RB
+    StackPop RC
+    Debug
     Jump Hello
-    Jump XD2
     "#,
     );
 

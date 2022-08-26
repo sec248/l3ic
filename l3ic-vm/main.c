@@ -23,15 +23,13 @@ static uint8_t debug_bc[] = /* {
     vm_key_release,
 }; */
 {
-    vm_mouse_pos,
-    vm_get_pixel_rgb,
-    vm_dump_info,
+    1, 6, 0, 1, 9, 0, 0, 24, 255, 255, 1, 0, 105, 105, 25, 0, 26, 1, 26, 2, 255, 10, 0, 0
 };
 
 int main(void) {
     input_init();
 
-    ic_bytecode *bytecode = bytecode_from(debug_bc, 3);
+    ic_bytecode *bytecode = bytecode_from(debug_bc, 24);
     if (bytecode == NULL) {
         return 1;
     }
