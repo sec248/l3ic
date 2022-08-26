@@ -13,7 +13,7 @@ L3IC (**L**ow **L**evel **L**anguage for **I**nput **C**ontrolling) allows you t
 
 ### Library
 
-L3IC-LIB contains everything you need including parser and virtual machine (and also will add compiler and decompiler). Other sub-projects are actually a frontend of this library.
+L3IC-LIB contains everything you need including parser and virtual machine.
 
 Library itself is written in C and has a simple to use api.
 
@@ -33,7 +33,7 @@ L3IC-VM is a bytecode virtual machine for L3IC.
 
 L3IC-IRC is an intermediate representation compiler that converts into L3IC bytecode.
 
-- Planning to write in C.
+- Planning to write in Rust.
 - Planning to use pascal-case (`ThisIsPascalCase`).
 - Planning to add pre-processor.
 
@@ -41,7 +41,7 @@ L3IC-IRC is an intermediate representation compiler that converts into L3IC byte
 
 L3IC-BDE is a decompiler for L3IC bytecode that converts your program to intermediate representation.
 
-- Planning to write in C.
+- Planning to write in Rust.
 - Decompiler will not be in focus until L3IC reaches a certain point.
 
 ### Macro Creator

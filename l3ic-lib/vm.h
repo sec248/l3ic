@@ -19,7 +19,7 @@ enum {
 #define UNKNOWN_LABEL_ID "unknown label id"
 
 #define vm_error(command, message) \
-    fprintf(stderr, "[%s:%I64lu]: %s.", command, vm->idx, message); \
+    fprintf(stderr, "[%s:%lu]: %s.", command, vm->idx, message); \
     return 0;
 
 #define __vm_math_h(name, op) \

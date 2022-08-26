@@ -23,13 +23,7 @@ static uint8_t debug_bc[] = /* {
     vm_key_release,
 }; */
 {
-    vm_set_reg, REG_X, 0x02, 0xFF,
-    vm_set_reg, REG_Y, 0x00, 0x16,
-    vm_dump_info,
-    vm_get_pixel_rgb,
-    vm_dump_info,
-    vm_set_reg, REG_X, 0x02, 0xFF,
-    vm_set_reg, REG_Y, 0x00, 0x69,
+    vm_mouse_pos,
     vm_get_pixel_rgb,
     vm_dump_info,
 };
@@ -37,7 +31,7 @@ static uint8_t debug_bc[] = /* {
 int main(void) {
     input_init();
 
-    ic_bytecode *bytecode = bytecode_from(debug_bc, 21);
+    ic_bytecode *bytecode = bytecode_from(debug_bc, 3);
     if (bytecode == NULL) {
         return 1;
     }
