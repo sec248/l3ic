@@ -32,41 +32,41 @@ void parser_collect(ic_parser *parser, uint8_t in) {
         parser->current_command = in;
 
         switch (in) {
-            case vm_set_reg:
-            case vm_add_reg:
-            case vm_sub_reg:
-            case vm_mul_reg:
-            case vm_div_reg:
-            case vm_mod_reg:
+            case vm_set_reg: // irc
+            case vm_add_reg: // irc
+            case vm_sub_reg: // irc
+            case vm_mul_reg: // irc
+            case vm_div_reg: // irc
+            case vm_mod_reg: // irc
                 parser->argc_to_collect = 3;
                 break;
-            case vm_stack_push:
-            case vm_copy_reg:
-            case vm_swap_reg:
-            case vm_set_label:
-            case vm_jump_label:
+            case vm_stack_push: // irc
+            case vm_copy_reg: // irc
+            case vm_swap_reg: // irc
+            case vm_set_label: // irc
+            case vm_jump_label: // irc
                 parser->argc_to_collect = 2;
                 break;
-            case vm_stack_pop:
-            case vm_stack_push_reg:
+            case vm_stack_pop: // irc
+            case vm_stack_push_reg: // irc
                 parser->argc_to_collect = 1;
                 break;
-            case vm_key_press:
-            case vm_key_release:
-            case vm_mouse_pos:
-            case vm_mouse_scrolld_up:
-            case vm_mouse_scrolld_down:
-            case vm_mouse_scrollu_up:
-            case vm_mouse_scrollu_down:
-            case vm_mouse_middle_up:
-            case vm_mouse_middle_down:
-            case vm_mouse_right_up:
-            case vm_mouse_right_down:
-            case vm_mouse_left_up:
-            case vm_mouse_left_down:
-			case vm_get_pixel_rgb:
-			case vm_mouse_move:
-            case vm_dump_info:
+            case vm_key_press: // irc
+            case vm_key_release: // irc
+            case vm_mouse_pos: // irc
+            case vm_mouse_scrolld_up: // irc
+            case vm_mouse_scrolld_down: // irc
+            case vm_mouse_scrollu_up: // irc
+            case vm_mouse_scrollu_down: // irc
+            case vm_mouse_middle_up: // irc
+            case vm_mouse_middle_down: // irc
+            case vm_mouse_right_up: // irc
+            case vm_mouse_right_down: // irc
+            case vm_mouse_left_up: // irc
+            case vm_mouse_left_down: // irc
+			case vm_get_pixel_rgb: // irc
+			case vm_mouse_move: // irc
+            case vm_dump_info: // irc
                 push_command
                 reset_command
                 break;
