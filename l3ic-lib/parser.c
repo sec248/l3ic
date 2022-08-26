@@ -67,6 +67,7 @@ void parser_collect(ic_parser *parser, uint8_t in) {
 			case vm_get_pixel_rgb: // irc
 			case vm_mouse_move: // irc
             case vm_dump_info: // irc
+            case vm_sleep:
                 push_command
                 reset_command
                 break;

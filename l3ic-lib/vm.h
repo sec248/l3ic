@@ -3,6 +3,7 @@
 
 #include "parser.c"
 #include <stdio.h>
+#include <unistd.h>
 
 enum {
     REG_A = 0,

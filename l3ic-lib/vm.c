@@ -166,6 +166,11 @@ uint8_t vm_handle(ic_vm *vm) {
             vm->registers[REG_Z] = result.b;
             break;
         }
+        case vm_sleep: {
+            uint16_t sleep_time = vm->registers[REG_X];
+            sleep(sleep_time);
+            break;
+        }
         case vm_dump_info: {
             printf("~[ L3IC DEBUG INFORMATIONS ]~\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nRegA = %d\nRegB = %d\nRegC = %d\nRegX = %d\nRegY = %d\nRegZ = %d\nRegI = %d\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n",
                 vm->registers[REG_A],
