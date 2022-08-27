@@ -1,1 +1,1 @@
-clang -Os -s -Werror -Wall -fstack-protector -std=c99 -o ./l3ic-vm ./main.c  -lX11 -lXtst
+clang -Os -s -Werror -Wall -fstack-protector -std=c99 -pedantic-errors -o ./l3ic-vm ./main.c  -lX11 -lXtst

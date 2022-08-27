@@ -1,0 +1,6 @@
+SetRegister RI 0001
+SetRegister RA 0000
+Label Naber
+AddRegister RA 0001
+Debug
+Jump Naber

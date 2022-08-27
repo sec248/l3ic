@@ -4,3 +4,4 @@
 .vscode
 target/
 *.lock
+l3ic-vm/l3ic-vm

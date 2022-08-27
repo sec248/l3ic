@@ -35,7 +35,6 @@ L3IC-IRC is an intermediate representation compiler that converts into L3IC byte
 
 - Planning to write in Rust.
 - Planning to use pascal-case (`ThisIsPascalCase`).
-- Planning to add pre-processor.
 
 ### Bytecode Decompiler
 

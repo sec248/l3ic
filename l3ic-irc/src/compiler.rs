@@ -1,5 +1,4 @@
-use core::panic;
-use std::{collections::HashMap, mem, num::ParseIntError};
+use std::{cell::Cell, collections::HashMap, mem, num::ParseIntError};
 
 #[derive(Debug)]
 pub enum Command {
@@ -26,6 +25,7 @@ pub struct Compiler {
     arg_count: usize,
     jump_table_id_calculated: u16,
     collected_arguments: Vec<String>,
+    pub compiler_status: Cell<bool>,
     pub commands: Vec<u8>,
     pub jump_table: HashMap<String, u16>,
 }
@@ -43,6 +43,7 @@ impl Compiler {
     {
         Self {
             source: source.to_string(),
+            compiler_status: Cell::new(true),
             ..Default::default()
         }
     }
@@ -55,10 +56,14 @@ impl Compiler {
             .collect();
 
         for keyword in splitted {
-            if let Command::None = self.current_command {
-                self.command_collector(keyword);
+            if self.compiler_status.get() {
+                if let Command::None = self.current_command {
+                    self.command_collector(keyword);
+                } else {
+                    self.arg_collector(keyword);
+                }
             } else {
-                self.arg_collector(keyword);
+                break;
             }
         }
     }
@@ -120,7 +125,10 @@ impl Compiler {
                         self.commands.push((table_id >> 8) as u8);
                         self.commands.push((table_id & 0xFF) as u8);
                     }
-                    None => panic!("unknown jump id."),
+                    None => {
+                        eprintln!("unknown jump id.");
+                        self.compiler_status.set(false);
+                    }
                 }
             }
             Command::Label => {
@@ -160,13 +168,20 @@ impl Compiler {
             "RY" => 4,
             "RZ" => 5,
             "RI" => 6,
-            _ => panic!("unknown register id."),
+            _ => {
+                eprintln!("unknown register id.");
+                self.compiler_status.set(false);
+
+                0
+            }
         }
     }
 
     fn calculate_int(&self, hex_v: &str) -> (u8, u8) {
         if hex_v.len() != 4 {
-            panic!("numbers must be 2 byte.");
+            eprintln!("numbers must be 2 byte.");
+            self.compiler_status.set(false);
+            return (0, 0);
         }
 
         let res: Result<Vec<u8>, ParseIntError> = (0..hex_v.len())
@@ -176,7 +191,11 @@ impl Compiler {
 
         match res {
             Ok(bytes) => (bytes[0], bytes[1]),
-            Err(_) => panic!("unknown hex value."),
+            Err(_) => {
+                eprintln!("invalid number value.");
+                self.compiler_status.set(false);
+                (0, 0)
+            }
         }
     }
 
