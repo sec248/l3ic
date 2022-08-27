@@ -18,7 +18,7 @@ pub enum Command {
     StackPop,
     CompareBigger,
     CompareSmaller,
-    CompareEqual
+    CompareEqual,
 }
 
 #[derive(Default, Debug)]
@@ -187,25 +187,26 @@ impl Compiler {
         }
     }
 
-    fn calculate_int(&self, hex_v: &str) -> (u8, u8) {
-        if hex_v.len() != 4 {
-            eprintln!("numbers must be 2 byte.");
-            self.compiler_status.set(false);
-            return (0, 0);
-        }
+    fn calculate_int(&self, number: &str) -> (u8, u8) {
+        if let Ok(value) = number.parse::<u16>() {
+            let value_to_process = format!("{:01$x}", value, 4);
+            let res: Result<Vec<u8>, ParseIntError> = (0..value_to_process.len())
+                .step_by(2)
+                .map(|i| u8::from_str_radix(&value_to_process[i..i + 2], 16))
+                .collect();
 
-        let res: Result<Vec<u8>, ParseIntError> = (0..hex_v.len())
-            .step_by(2)
-            .map(|i| u8::from_str_radix(&hex_v[i..i + 2], 16))
-            .collect();
-
-        match res {
-            Ok(bytes) => (bytes[0], bytes[1]),
-            Err(_) => {
-                eprintln!("invalid number value.");
-                self.compiler_status.set(false);
-                (0, 0)
+            match res {
+                Ok(bytes) => (bytes[0], bytes[1]),
+                Err(_) => {
+                    eprintln!("invalid number.");
+                    self.compiler_status.set(false);
+                    (0, 0)
+                }
             }
+        } else {
+            eprintln!("invalid number.");
+            self.compiler_status.set(false);
+            (0, 0)
         }
     }
 
