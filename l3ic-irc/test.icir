@@ -1,6 +1,7 @@
-SetRegister RI 0001
+SetRegister RB 00FF
 SetRegister RA 0000
 Label Naber
 AddRegister RA 0001
 Debug
+CompareBigger RB RA
 Jump Naber

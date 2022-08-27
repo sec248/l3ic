@@ -16,6 +16,9 @@ pub enum Command {
     StackPush,
     StackPushRegister,
     StackPop,
+    CompareBigger,
+    CompareSmaller,
+    CompareEqual
 }
 
 #[derive(Default, Debug)]
@@ -100,6 +103,10 @@ impl Compiler {
             "GetScreenPixel" => self.process_instant(28),
             "SetMousePosition" => self.process_instant(11),
             "Sleep" => self.process_instant(29),
+            "CompareBigger" => (2, Command::CompareBigger),
+            "CompareSmaller" => (2, Command::CompareSmaller),
+            "CompareEqual" => (2, Command::CompareEqual),
+            "ReverseBool" => self.process_instant(33),
             _ => (0, Command::None),
         };
     }
@@ -155,6 +162,9 @@ impl Compiler {
             Command::StackPush => self.process_2b_command(24),
             Command::StackPushRegister => self.process_1r_command(25),
             Command::StackPop => self.process_1r_command(26),
+            Command::CompareBigger => self.process_2r_command(30),
+            Command::CompareSmaller => self.process_2r_command(31),
+            Command::CompareEqual => self.process_2r_command(32),
             Command::None => return,
         }
     }

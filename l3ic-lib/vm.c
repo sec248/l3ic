@@ -171,6 +171,43 @@ uint8_t vm_handle(ic_vm *vm) {
             sleep(sleep_time);
             break;
         }
+        case vm_compare_bigger: {
+            uint8_t reg1 = command->args[0];
+            uint8_t reg2 = command->args[1];
+
+            if (reg1 > REG_COUNT - 1 || reg2 > REG_COUNT - 1) {
+                vm_error("CopyReg", UNKNOWN_REG_ID)
+            }
+
+            vm->registers[REG_I] = vm->registers[reg1] > vm->registers[reg2];
+            break;
+        }
+        case vm_compare_smaller: {
+            uint8_t reg1 = command->args[0];
+            uint8_t reg2 = command->args[1];
+
+            if (reg1 > REG_COUNT - 1 || reg2 > REG_COUNT - 1) {
+                vm_error("CopyReg", UNKNOWN_REG_ID)
+            }
+
+            vm->registers[REG_I] = vm->registers[reg1] < vm->registers[reg2];
+            break;
+        }
+        case vm_compare_equal:{
+            uint8_t reg1 = command->args[0];
+            uint8_t reg2 = command->args[1];
+
+            if (reg1 > REG_COUNT - 1 || reg2 > REG_COUNT - 1) {
+                vm_error("CopyReg", UNKNOWN_REG_ID)
+            }
+
+            vm->registers[REG_I] = vm->registers[reg1] == vm->registers[reg2];
+            break;
+        }
+        case vm_reverse_cond: {
+            vm->registers[REG_I] = !vm->registers[REG_I];
+            break;
+        }
         case vm_dump_info: {
             printf("~[ L3IC DEBUG INFORMATIONS ]~\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nRegA = %d\nRegB = %d\nRegC = %d\nRegX = %d\nRegY = %d\nRegZ = %d\nRegI = %d\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n",
                 vm->registers[REG_A],

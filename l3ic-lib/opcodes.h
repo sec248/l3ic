@@ -34,6 +34,10 @@ typedef enum ic_opcodes {
     vm_mouse_pos,
 	vm_get_pixel_rgb,
     vm_sleep,
+    vm_compare_bigger,
+    vm_compare_smaller,
+    vm_compare_equal,
+    vm_reverse_cond,
     vm_dump_info = 255
 } ic_opcodes;
 

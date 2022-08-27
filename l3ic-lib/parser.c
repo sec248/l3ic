@@ -45,6 +45,9 @@ void parser_collect(ic_parser *parser, uint8_t in) {
             case vm_swap_reg: // irc
             case vm_set_label: // irc
             case vm_jump_label: // irc
+            case vm_compare_bigger: // irc
+            case vm_compare_smaller: // irc
+            case vm_compare_equal: // irc
                 parser->argc_to_collect = 2;
                 break;
             case vm_stack_pop: // irc
@@ -67,7 +70,8 @@ void parser_collect(ic_parser *parser, uint8_t in) {
 			case vm_get_pixel_rgb: // irc
 			case vm_mouse_move: // irc
             case vm_dump_info: // irc
-            case vm_sleep:
+            case vm_sleep: // irc
+            case vm_reverse_cond: // irc
                 push_command
                 reset_command
                 break;
