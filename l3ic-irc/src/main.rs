@@ -3,9 +3,9 @@ pub mod compiler;
 fn main() {
     let mut compiler = compiler::Compiler::new(
         r#"
-    SetRegister RX 02FA
-    SetRegister RY 00FF
-    SetMousePosition
+    SetRegister RX 0005
+    Sleep
+    GetMousePosition
     Debug 
     "#,
     );

@@ -22,12 +22,12 @@ static uint8_t debug_bc[] = /* {
     vm_key_press,
     vm_key_release,
 }; */
-{1, 3, 2, 250, 1, 4, 0, 255, 11, 255};
+{1, 3, 0, 5, 29, 27, 255};
 
 int main(void) {
     input_init();
 
-    ic_bytecode *bytecode = bytecode_from(debug_bc, 10);
+    ic_bytecode *bytecode = bytecode_from(debug_bc, 7);
     if (bytecode == NULL) {
         return 1;
     }

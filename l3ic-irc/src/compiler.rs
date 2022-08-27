@@ -94,6 +94,7 @@ impl Compiler {
             "MouseLeftRelease" => self.process_instant(14),
             "GetScreenPixel" => self.process_instant(28),
             "SetMousePosition" => self.process_instant(11),
+            "Sleep" => self.process_instant(29),
             _ => (0, Command::None),
         };
     }
